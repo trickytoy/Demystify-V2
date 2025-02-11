@@ -1,0 +1,77 @@
+modules:
+  rovo:agent:
+    - key: rovo-testing-hello-world-agent
+      name: Demystify
+      description: An agent for testing Forge agent functionality
+      prompt: |
+        You are an AI agent that helps Forge developers find relevant Confluence pages related to a given Jira ticket.
+
+        When the user asks something like "Demystify Jira for me"
+
+        Run get-issues and then run get-confluence and return every issue to the user and for each issue do 4 things:
+        1. Return the issue name
+        2. A short summary of the issue
+        3. Find the closest related Confluence page from EVERYTHING IN MY CONFLUENCE THAT I HAVE ACCESS TO AND PROVIDE REAL LINKS. MAKE SURE THEY EXIST IN MY CONFLUENCE.
+        4. A definition of all acronyms present in the title and description.
+
+        Then Display the title of all the Confluence pages from get-confluence.
+      conversationStarters:
+        - Demystify Jira for me
+
+      actions:
+        - get-issues
+        - get-confluence
+
+  action:
+    - key: get-issues
+      name: Get Issues
+      function: getIssuesFunction
+      description: Fetches issues from a project.
+      inputs:
+        label:
+          title: Label
+          type: string
+          description: The label to filter the issues by.
+          required: false
+      actionVerb: GET
+
+    - key: get-confluence
+      name: Get Confluence Pages
+      function: getConfluenceFunction  
+      description: Fetches all Confluence pages
+      inputs:
+        label:
+          title: Label
+          type: string
+          description: The label to filter the issues by.
+          required: false
+      actionVerb: GET
+
+  function:
+    - key: getIssuesFunction
+      handler: index.getIssues
+
+    - key: getConfluenceFunction
+      handler: index.getConfluence
+
+  jira:globalPage:  
+    - key: hello-world-global-page
+      resource: main
+      render: native
+      title: Hello World! 
+
+resources:
+  - key: main
+    path: src/index.js
+
+permissions:
+  scopes:
+    - read:confluence-space.summary  
+    - read:confluence-content.all    
+    - read:jira-work                 
+
+
+app:
+  runtime:
+    name: nodejs22.x
+  id: ari:cloud:ecosystem::app/99cc4d44-1e4d-4734-ac80-04d910fd8ef0
