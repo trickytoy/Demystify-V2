@@ -9,10 +9,10 @@ export const getIssues = async (payload, requestContext) => {
     }
 
     const data = await response.json();
-    console.log(data);
+    //console.log(data);
     return data;
   } catch (error) {
-    console.error('Error fetching Jira issues:', error);
+    //console.error('Error fetching Jira issues:', error);
     return null;
   }
 };
@@ -30,11 +30,15 @@ export const getConfluence = async () => {
     }
 
     const confluenceData = await response.json();
-    console.log(confluenceData);
+    //console.log(confluenceData);
     return confluenceData;
   } catch (error) {
-    console.error('Error fetching Confluence pages:', error);
+    //console.error('Error fetching Confluence pages:', error);
     return null;
   }
 };
 
+export async function handleResponse(event, context) {
+  console.log("Handling response with event data:", event);
+  return event
+}

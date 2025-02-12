@@ -7,4 +7,14 @@ resolver.define('getText', (req) => {
   return 'Hello, world!';
 });
 
+const api_url ="https://zenquotes.io/api/quotes/";
+
+
 export const handler = resolver.getDefinitions();
+
+async function getapi(url)
+{
+  const response = await fetch(url);
+  var data = await response.json();
+  console.log(data);
+}

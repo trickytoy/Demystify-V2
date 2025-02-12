@@ -1,26 +1,49 @@
 modules:
   rovo:agent:
-    - key: rovo-testing-hello-world-agent
+    - key: rovo-testing-hello-agent
       name: Demystify
-      description: An agent for testing Forge agent functionality
+      description: Demystify the context of Jira issues
       prompt: |
         You are an AI agent that helps Forge developers find relevant Confluence pages related to a given Jira ticket.
 
         When the user asks something like "Demystify Jira for me"
 
         Run get-issues and then run get-confluence and return every issue to the user and for each issue do 4 things:
-        1. Return the issue name
+        1. Return the issue.key and issue.name
         2. A short summary of the issue
-        3. Find the closest related Confluence page from EVERYTHING IN MY CONFLUENCE THAT I HAVE ACCESS TO AND PROVIDE REAL LINKS. MAKE SURE THEY EXIST IN MY CONFLUENCE.
+        3. Find the closest related Confluence page from the Confluence pages described below and link them:
         4. A definition of all acronyms present in the title and description.
 
-        Then Display the title of all the Confluence pages from get-confluence.
+        When Displaying all this information follow this structure:
+
+        {
+          "TEST-9": {
+              "Summary": "Enable Single Sign-On (SSO) for seamless authentication using Google and Microsoft accounts.",
+              "Related-Confluence": "https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5275661/SSO+Implementation+Guide",
+              "Acronyms": [{"SSO": "Single Sign-On"}, {"OAuth": "Open Authorization"}]
+          },
+        }
+
+        And then send that Snippet to the action handle-snippet as a dictionary
+
+        Confluence pages:
+        1. SSO Implementation Guide: Single Sign-On (SSO) is a user authentication process that allows users to access multiple applications with a single set of login credentials. Implementing SSO enhances security, reduces password fatigue, and streamlines user experience. This guide outlines best practices, security considerations, and step-by-step implementation. (https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5275661/SSO+Implementation+Guide)
+        2. User Authentication Best Practices: User authentication is a critical component of application security. This document outlines best practices for implementing secure login mechanisms, Multi-Factor Authentication (MFA), and OAuth flows. (https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5210113/User+Authentication+Best+Practices)
+        3. Dashboard UI Design Guidelines: A well-designed dashboard provides users with valuable insights at a glance. This document outlines best practices for designing intuitive, accessible, and visually appealing dashboards.
+        4. Database Optimization Strategies: Optimizing database performance is crucial for ensuring efficient data retrieval, reducing query execution time, and maintaining system scalability. This document outlines best practices for indexing, caching, query optimization, and database design. (https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5275649/Database+Optimization+Strategies)
+        5. Dark Mode UI Design Considerations: Dark mode is a popular UI feature that enhances visual ergonomics by reducing eye strain, saving battery life on OLED screens, and offering an aesthetically pleasing alternative to light themes. This document outlines best practices and key considerations when designing a dark mode UI. (https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5112143/Dark+Mode+UI+Design+Considerations)
+        6. RBAC Implementation Guide: Role-Based Access Control (RBAC) is a security model that restricts system access based on user roles. It enhances security, simplifies management, and ensures compliance with organizational policies. This document provides a step-by-step guide to implementing RBAC effectively. (https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5308417/RBAC+Implementation+Guide)
+        7. Webhook Integration Best Practices: Webhooks are a powerful mechanism for enabling real-time communication between applications. They allow external services to send data to your application when specific events occur. This document outlines best practices for implementing webhooks securely and efficiently. (https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/4423948/Webhook+Integration+Best+Practices)
+        8. Payment Gateway Integration Guide: Integrating a payment gateway into your application enables secure and efficient transaction processing. This guide covers best practices, security considerations, and implementation steps for integrating payment gateways like Stripe, PayPal, and Square. (https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/4849666/Payment+Gateway+Integration+Guide)
+        9. Effective Email Notification Strategies: Email notifications are a crucial aspect of user engagement, keeping users informed and ensuring timely communication. A well-designed email notification system enhances user experience, increases retention, and drives user actions. This document outlines best practices, personalization techniques, and strategies for optimizing email notifications. (https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5112153/Effective+Email+Notification+Strategies) 
+
       conversationStarters:
         - Demystify Jira for me
 
       actions:
         - get-issues
         - get-confluence
+        - handle-response
 
   action:
     - key: get-issues
@@ -47,12 +70,22 @@ modules:
           required: false
       actionVerb: GET
 
+
+    - key: handle-response
+      name: Handle Response
+      function: handleResponseFunction
+      description: Processes and formats the response to return relevant Confluence pages and definitions for Jira issues.
+      actionVerb: TRIGGER
+
   function:
     - key: getIssuesFunction
       handler: index.getIssues
 
     - key: getConfluenceFunction
       handler: index.getConfluence
+
+    - key: handleResponseFunction
+      handler: index.handleResponse
 
   jira:globalPage:  
     - key: hello-world-global-page

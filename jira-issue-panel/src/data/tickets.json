@@ -1,0 +1,56 @@
+{
+    "TEST-9": {
+        "Summary": "Enable Single Sign-On (SSO) for seamless authentication using Google and Microsoft accounts.",
+        "Related-Confluence": "https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5275661/SSO+Implementation+Guide",
+        "Confluence Title": "SSO Implementation Guide",
+        "Acronyms": [{"SSO": "Single Sign-On"}, {"OAuth": "Open Authorization"}]
+    },
+    "TEST-8": {
+        "Summary": "Revamp email notifications to make them more actionable and user-friendly, with improved templates and personalization.",
+        "Related-Confluence": "https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5275662/Effective+Email+Notification+Strategies",
+        "Confluence Title": "Effective Email Notification Strategies",
+        "Acronyms": []
+    },
+    "TEST-7": {
+        "Summary": "Resolve issues with payment failures due to incorrect webhook handling and improve logging for better debugging.",
+        "Related-Confluence": "https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5275663/Payment+Gateway+Integration+Guide",
+        "Confluence Title": "Payment Gateway Integration Guide",
+        "Acronyms": []
+    },
+    "TEST-6": {
+        "Summary": "Allow external systems to receive real-time updates when specific events occur (e.g., task updates, status changes).",
+        "Related-Confluence": "https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5275664/Webhook+Integration+Best+Practices",
+        "Confluence Title": "Webhook Integration Best Practices",
+        "Acronyms": []
+    },
+    "TEST-5": {
+        "Summary": "Introduce a dark mode feature with a toggle switch in user settings. The mode should persist across sessions.",
+        "Related-Confluence": "https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5275665/Dark+Mode+UI+Design+Considerations",
+        "Confluence Title": "Dark Mode UI Design Considerations",
+        "Acronyms": []
+    },
+    "TEST-4": {
+        "Summary": "Identify performance bottlenecks in API calls and improve response time by optimizing SQL queries and introducing caching.",
+        "Related-Confluence": "https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5275666/Database+Optimization+Strategies",
+        "Confluence Title": "Database Optimization Strategies",
+        "Acronyms": [{"API": "Application Programming Interface"}, {"SQL": "Structured Query Language"}]
+    },
+    "TEST-3": {
+        "Summary": "Implement a role-based permissions system to restrict access to sensitive sections of the application.",
+        "Related-Confluence": "https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5275667/RBAC+Implementation+Guide",
+        "Confluence Title": "RBAC Implementation Guide",
+        "Acronyms": [{"RBAC": "Role-Based Access Control"}]
+    },
+    "TEST-2": {
+        "Summary": "Revamp the dashboard UI to improve readability and user experience. Add customizable widgets and dark mode support.",
+        "Related-Confluence": "https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5112143/Dark+Mode+UI+Design+Considerations",
+        "Confluence Title": "Dark Mode UI Design Considerations",
+        "Acronyms": [{"UI": "User Interface"}, {"UX": "User Experience"}, {"WCAG": "Web Content Accessibility Guidelines"}]
+    },
+    "TEST-1": {
+        "Summary": "Implement Multi-Factor Authentication (MFA) for User Logins.",
+        "Related-Confluence": "https://atl-forgehack2-team-16.atlassian.net/wiki/spaces/test/pages/5210113/User+Authentication+Best+Practices",
+        "Confluence Title": "User Authentication Best Practices",
+        "Acronyms": [{"MFA": "Multi-Factor Authentication"}, {"TOTP": "Time-Based One-Time Password"}]
+    }
+}
